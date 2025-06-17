@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Data Mahasiswa (File TXT)</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        input {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        button {
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Edit Mahasiswa dari File TXT</h2>
+
+    <form th:action="@{/mahasiswa/editfile}" method="post" th:object="${mahasiswa}">
+        NPM:<br/> <input type="text" th:field="*{npm}" readonly /><br/>
+        Nama:<br/> <input type="text" th:field="*{nama}" /><br/>
+        Prodi:<br/> <input type="text" th:field="*{prodi}" /><br/>
+        IPK:<br/> <input type="text" th:field="*{ipk}" /><br/>
+
+        <button type="submit">Simpan Perubahan</button>
+        <button type="button" th:onclick="'window.location.href=\'' + @{/mahasiswa/lihatdata} + '\''">
+            Kembali ke Daftar
+        </button>
+    </form>
+</body>
+</html>

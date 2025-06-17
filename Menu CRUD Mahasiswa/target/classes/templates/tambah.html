@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tambah Mahasiswa</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin-top: 50px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+            padding: 25px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            min-width: 300px;
+        }
+
+        input {
+            width: 100%;
+            margin-bottom: 5px;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+            height: 18px; /* agar form tidak bergeser ketika error muncul */
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        button {
+            padding: 8px 14px;
+            margin-top: 10px;
+            margin-right: 10px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .secondary {
+            background-color: #6c757d;
+        }
+
+        .secondary:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <h2>Tambah Mahasiswa</h2>
+
+    <form method="post" th:action="@{/mahasiswa/tambah}" th:object="${mahasiswa}">
+        <label for="npm">NPM:</label><br/>
+        <input type="text" th:field="*{npm}" id="npm" />
+        <span class="error" th:errors="*{npm}" th:if="${#fields.hasErrors('npm')}"></span>
+        <span class="error" th:if="${!#fields.hasErrors('npm')}">&nbsp;</span>
+
+        <label for="nama">Nama:</label><br/>
+        <input type="text" th:field="*{nama}" id="nama" />
+        <span class="error" th:errors="*{nama}" th:if="${#fields.hasErrors('nama')}"></span>
+        <span class="error" th:if="${!#fields.hasErrors('nama')}">&nbsp;</span>
+
+        <label for="prodi">Prodi:</label><br/>
+        <input type="text" th:field="*{prodi}" id="prodi" />
+        <span class="error" th:errors="*{prodi}" th:if="${#fields.hasErrors('prodi')}"></span>
+        <span class="error" th:if="${!#fields.hasErrors('prodi')}">&nbsp;</span>
+
+        <label for="ipk">IPK:</label><br/>
+        <input type="text" th:field="*{ipk}" id="ipk" />
+        <span class="error" th:errors="*{ipk}" th:if="${#fields.hasErrors('ipk')}"></span>
+        <span class="error" th:if="${!#fields.hasErrors('ipk')}">&nbsp;</span>
+
+        <button type="submit">Simpan</button>
+        <button type="button" class="secondary" onclick="window.location.href='/menu'">Kembali ke Menu</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Daftar Mahasiswa</title>
+</head>
+<body>
+    <h2>Daftar Mahasiswa</h2>
+    <a th:href="@{/mahasiswa/tambah}">Tambah Mahasiswa</a>
+    <br><br>
+    <table border="1" cellpadding="5" cellspacing="0">
+        <tr>
+            <th>NPM</th>
+            <th>Nama</th>
+            <th>Prodi</th>
+            <th>IPK</th>
+            <th>Aksi</th>
+        </tr>
+        <tr th:each="m : ${mahasiswaList}">
+            <td th:text="${m.npm}">NPM</td>
+            <td th:text="${m.nama}">Nama</td>
+            <td th:text="${m.prodi}">Prodi</td>
+            <td th:text="${m.ipk}">IPK</td>
+            <td>
+                <a th:href="@{'/mahasiswa/edit/' + ${m.npm}}">Edit</a> |
+                <a th:href="@{'/mahasiswa/hapus/' + ${m.npm}}"
+                   onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(mahasiswaList)}">
+            <td colspan="5" style="text-align:center;">Belum ada data mahasiswa.</td>
+        </tr>
+    </table>
+    <br>
+    <a th:href="@{/}">Kembali ke Menu Utama</a>
+</body>
+</html>

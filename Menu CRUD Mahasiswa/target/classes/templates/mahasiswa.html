@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Daftar Mahasiswa</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin-top: 40px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            margin: auto;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 12px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        .button-container {
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .empty-message {
+            font-style: italic;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <h2>DAFTAR MAHASISWA</h2>
+
+    <table>
+        <tr>
+            <th>NPM</th>
+            <th>Nama</th>
+            <th>Prodi</th>
+            <th>IPK</th>
+            <th>Edit dan Hapus</th>
+        </tr>
+        <tr th:each="m : ${mahasiswaList}">
+            <td th:text="${m.npm}"></td>
+            <td th:text="${m.nama}"></td>
+            <td th:text="${m.prodi}"></td>
+            <td th:text="${m.ipk}"></td>
+            <td>
+                <a th:href="@{'/mahasiswa/edit/' + ${m.npm}}">Edit</a>&nbsp;|&nbsp;
+                <a th:href="@{'/mahasiswa/hapus/' + ${m.npm}}"
+                   onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(mahasiswaList)}">
+            <td colspan="5" class="empty-message">Belum ada data mahasiswa</td>
+        </tr>
+    </table>
+
+    <div class="button-container">
+        <button type="button" th:onclick="'window.location.href=\'' + @{/menu} + '\''">
+            Kembali ke Menu Utama
+        </button>
+        <button type="button" th:onclick="'window.location.href=\'' + @{/mahasiswa/tambah} + '\''">
+            Tambah Data Mahasiswa
+        </button>
+    </div>
+</body>
+</html>
